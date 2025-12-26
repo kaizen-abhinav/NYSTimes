@@ -1,0 +1,585 @@
+/* ============================================
+   New York Square Hotel - Animations
+   Scroll-triggered and hover animations
+   ============================================ */
+
+/* ============================================
+   Reveal Animations
+   ============================================ */
+
+/* Base state for all reveal elements */
+.reveal-text,
+.reveal-up,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Text reveal from bottom */
+.reveal-text {
+    transform: translateY(30px);
+}
+
+.reveal-text.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Reveal from bottom */
+.reveal-up {
+    transform: translateY(60px);
+    transition-delay: var(--delay, 0s);
+}
+
+.reveal-up.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Reveal from left */
+.reveal-left {
+    transform: translateX(-60px);
+}
+
+.reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Reveal from right */
+.reveal-right {
+    transform: translateX(60px);
+}
+
+.reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale reveal */
+.reveal-scale {
+    transform: scale(0.8);
+}
+
+.reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ============================================
+   Staggered Animations
+   ============================================ */
+.stagger-children > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stagger-children.revealed > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-children.revealed > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children.revealed > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children.revealed > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-children.revealed > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-children.revealed > *:nth-child(6) { transition-delay: 0.6s; }
+
+.stagger-children.revealed > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   Hover Animations
+   ============================================ */
+
+/* Image zoom on hover */
+.hover-zoom {
+    overflow: hidden;
+}
+
+.hover-zoom img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-zoom:hover img {
+    transform: scale(1.1);
+}
+
+/* Lift on hover */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Shine effect */
+.hover-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.hover-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transform: skewX(-25deg);
+    transition: left 0.5s ease;
+}
+
+.hover-shine:hover::before {
+    left: 150%;
+}
+
+/* Underline animation */
+.hover-underline {
+    position: relative;
+}
+
+.hover-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: width 0.3s ease;
+}
+
+.hover-underline:hover::after {
+    width: 100%;
+}
+
+/* Icon spin on hover */
+.hover-spin:hover i {
+    animation: spin 0.5s ease;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Bounce on hover */
+.hover-bounce:hover {
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ============================================
+   Button Animations
+   ============================================ */
+
+/* Ripple effect */
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Arrow animation */
+.btn-arrow i {
+    transition: transform 0.3s ease;
+}
+
+.btn-arrow:hover i {
+    transform: translateX(5px);
+}
+
+/* ============================================
+   Loading & Skeleton Animations
+   ============================================ */
+
+/* Skeleton loading */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--color-light-gray) 25%,
+        var(--color-cream) 50%,
+        var(--color-light-gray) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Pulse loading */
+.pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ============================================
+   Floating Animations
+   ============================================ */
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.float-slow {
+    animation: float 5s ease-in-out infinite;
+}
+
+.float-fast {
+    animation: float 2s ease-in-out infinite;
+}
+
+/* ============================================
+   Parallax Styles
+   ============================================ */
+
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-bg {
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+}
+
+/* ============================================
+   Text Animations
+   ============================================ */
+
+/* Typing effect */
+.typing {
+    overflow: hidden;
+    border-right: 2px solid var(--color-accent);
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--color-accent); }
+}
+
+/* Gradient text animation */
+.gradient-text {
+    background: linear-gradient(
+        90deg,
+        var(--color-primary),
+        var(--color-accent),
+        var(--color-secondary),
+        var(--color-primary)
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ============================================
+   Page Transition
+   ============================================ */
+
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-primary-dark);
+    z-index: 9998;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+.page-transition.active {
+    animation: pageTransition 0.8s ease-in-out;
+}
+
+@keyframes pageTransition {
+    0% {
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+    50% {
+        transform: scaleX(1);
+        transform-origin: right;
+    }
+    51% {
+        transform-origin: left;
+    }
+    100% {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+}
+
+/* ============================================
+   Cursor Effects
+   ============================================ */
+
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.custom-cursor.active {
+    transform: scale(1.5);
+    opacity: 0.5;
+}
+
+.cursor-follower {
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.3s ease;
+}
+
+/* ============================================
+   Decorative Elements
+   ============================================ */
+
+/* Animated border */
+.animated-border {
+    position: relative;
+}
+
+.animated-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid var(--color-accent);
+    animation: borderPulse 2s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.02); }
+}
+
+/* Rotating decoration */
+.rotating-deco {
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   Counter Animation
+   ============================================ */
+
+.counter {
+    display: inline-block;
+}
+
+.counter-animate {
+    animation: countUp 2s ease-out forwards;
+}
+
+/* ============================================
+   Image Reveal
+   ============================================ */
+
+.img-reveal {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-reveal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-primary);
+    z-index: 1;
+    transform: scaleX(1);
+    transform-origin: right;
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.img-reveal.revealed::before {
+    transform: scaleX(0);
+}
+
+.img-reveal img {
+    transform: scale(1.2);
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.img-reveal.revealed img {
+    transform: scale(1);
+}
+
+/* ============================================
+   Scroll Progress
+   ============================================ */
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
+    z-index: 9999;
+    transition: width 0.1s linear;
+}
+
+/* ============================================
+   Menu Animations
+   ============================================ */
+
+.menu-item {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.nav-menu.active .menu-item:nth-child(1) { transition-delay: 0.1s; }
+.nav-menu.active .menu-item:nth-child(2) { transition-delay: 0.15s; }
+.nav-menu.active .menu-item:nth-child(3) { transition-delay: 0.2s; }
+.nav-menu.active .menu-item:nth-child(4) { transition-delay: 0.25s; }
+.nav-menu.active .menu-item:nth-child(5) { transition-delay: 0.3s; }
+.nav-menu.active .menu-item:nth-child(6) { transition-delay: 0.35s; }
+.nav-menu.active .menu-item:nth-child(7) { transition-delay: 0.4s; }
+
+.nav-menu.active .menu-item {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ============================================
+   Smooth Scroll Indicator
+   ============================================ */
+
+.scroll-indicator {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: none;
+}
+
+@media (min-width: 1200px) {
+    .scroll-indicator {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+.scroll-indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid var(--color-gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.scroll-indicator-dot:hover,
+.scroll-indicator-dot.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    transform: scale(1.2);
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .reveal-text,
+    .reveal-up,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale {
+        opacity: 1;
+        transform: none;
+    }
+}
