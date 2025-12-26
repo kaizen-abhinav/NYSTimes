@@ -1,0 +1,13 @@
+{
+  "name": "nystimes-hotel",
+  "version": "1.0.0",
+  "description": "NYS Times Hotel Website",
+  "scripts": {
+    "start": "npx http-server -p 3000",
+    "dev": "npx http-server -p 3000 -c-1",
+    "build": "echo 'Static site - no build step required'"
+  },
+  "keywords": ["hotel", "website"],
+  "author": "",
+  "license": "ISC"
+}
